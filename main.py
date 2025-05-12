@@ -13,7 +13,6 @@ from packages.utils.download import download_video, download_audio
 from packages.utils.audio import is_audio, find_audio_format
 from packages.utils.get_format import get as get_format
 
-#from packages.utils import open_explorer
 from packages.utils import file
 
 def main(debug):
@@ -27,9 +26,9 @@ def main(debug):
 
         url = args.url
     except :
-        url = input('Masukkan URL : ')
+        url = input('Insert URL : ')
 
-    logging.info('Program Dimulai!')
+    logging.info('Program Started!')
 
     if not debug:
         ffmpeg = FFmpeg()
@@ -38,8 +37,8 @@ def main(debug):
 
     service = ytdlpServices(url)
 
-    # Proses url dan mengambil semua informasi format didalmnya
-    logging.info('Mengambil data dari URL...')
+    # Proses url dan ambil semua informasi format didalmnya
+    logging.info('Fetching data from URL...')
 
     info = service.get_info()
     info_title = sanitize(info['title']) + f' ({info['webpage_url_basename']})'
@@ -50,7 +49,7 @@ def main(debug):
 
     if type(formats) is list:    
         print('\n')
-        print('Pilih Format/Resolusi')
+        print('Choose Format/Resolution')
 
         print('-------------------------------')
         for idx, format in enumerate(formats):
@@ -58,11 +57,15 @@ def main(debug):
         
         print('-------------------------------')
 
-        choose_format = int(input('Pilih : ')) - 1
+        choose_format = int(input('Input : ')) - 1
 
         print('\n')
 
-        format = formats[choose_format]
+        try:
+            format = formats[choose_format]
+        except:
+            logging.error('Format not found. Are you sure you have chosen it correctly?')
+            exit()
     else:
         format = formats
 
@@ -71,7 +74,7 @@ def main(debug):
         audio_url = format['url']
         audio_ext = format['ext']
         
-        print('[ INFO ] Mendownload Audio...')
+        print('[ INFO ] Downloading Audio...')
         if format['protocol'] == 'm3u8_native':
             title = info_title + '(audio)'
             audio_ext = 'mp3'
@@ -81,13 +84,13 @@ def main(debug):
             download_audio(audio_url, info_title, audio_ext)
 
         #open_explorer.open_audio(info_title, audio_ext)
-        logging.info('Download Selesai!')
+        logging.info('Download Complete!')
     else:
         video_url = format['url']
         video_ext = format['ext']
 
 
-        logging.info('Mendownload Video...')
+        logging.info('Downloading Video...')
 
         if format['protocol'] == 'm3u8_native':
             title = info_title + '(video)'
@@ -99,7 +102,7 @@ def main(debug):
 
         audio_format = find_audio_format(formats)
         if audio_format:
-            logging.info('Mendownload Audio...')
+            logging.info('Downloading Audio...')
             audio_url = audio_format['url']
             audio_ext = audio_format['ext']
 
@@ -111,13 +114,10 @@ def main(debug):
             else:
                 download_audio(audio_url, info_title, audio_ext)
 
-            logging.info('Download selesai, menggabungkan file')
-            ffmpeg.merge_video_audio(info_title, video_ext, audio_ext)
-            
-            #open_explorer.open_video(f'{info_title}-merged', 'mp4')
-        
+            logging.info('Download Complete, merging file...')
+            ffmpeg.merge_video_audio(info_title, video_ext, audio_ext) 
 
-        logging.info('Program Selesai.')
+        logging.info('Program Completed.')
 
 
 main(debug=False)

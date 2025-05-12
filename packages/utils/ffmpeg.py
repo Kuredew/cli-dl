@@ -42,19 +42,19 @@ class FFmpeg:
         ffmpeg_url = 'https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-2025-05-07-git-1b643e3f65-essentials_build.7z'
         sevenzip_url = 'https://www.7-zip.org/a/7zr.exe'
 
-        logging.info('Menginstall Dependency yang dibutuhkan : FFMPEG, 7ZIP')
+        logging.info('Installing dependency : FFMPEG, 7ZIP')
 
         ffmpeg_7zip_path = os.path.join(self.ffmpeg_folder, 'ffmpeg.7z')
-        logging.info('Mendownload FFMPEG')
+        logging.info('Downloading FFMPEG')
         ffmpeg_download = download.start(ffmpeg_url, ffmpeg_7zip_path)
 
         if ffmpeg_download:
             if not(self.check_7zip()):
-                logging.info('Mendownload 7zip')
+                logging.info('Downloading 7zip')
                 sevenzip_download = download.start(sevenzip_url, os.path.join(self.sevenzip_folder, '7zip.exe'))
 
         if sevenzip_download:
-            logging.info('Menginstall ffmpeg')
+            logging.info('Extracting ffmpeg')
             cmd = [
                 self.sevenzip_path,
                 'x', ffmpeg_7zip_path,
@@ -64,10 +64,10 @@ class FFmpeg:
             subprocess.call(cmd)
             os.remove(ffmpeg_7zip_path)
 
-            logging.info('Install Selesai')
+            logging.info('Dependency has successfully installed')
 
     def m3u8_download(self, url, ext, file_name):
-        logging.info('Mendownload dengan ffmpeg...\n')
+        logging.info('Downloading with ffmpeg...\n')
 
         file = file_name + '.' + ext
 
@@ -99,10 +99,8 @@ class FFmpeg:
             output_file
         ]
 
-        print(cmd)
-
         subprocess.call(cmd)
 
-        logging.info('Membersihkan sampah.')
+        logging.info('Removing unused file.')
         os.remove(video_file)
         os.remove(audio_file)

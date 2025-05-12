@@ -8,7 +8,6 @@ from . import get_directory
 MAX_RETRIES = 5
 
 def resume(url, file, last_bytes, retry_count=0):
-    logging.info('Melanjutkan Download.')
     resume_header = {'Range': 'bytes=%d-' % last_bytes}
 
     try: 
@@ -30,7 +29,8 @@ def resume(url, file, last_bytes, retry_count=0):
         resume(url, file, file_size, retry_count + 1)
 
         if (retry_count == MAX_RETRIES):
-            logging.error('Periksa koneksi internet, internetmu poke.')
+            logging.error('Sorry, Please check your Internet Connection and run program again.')
+            exit()
 
         #return False
 
@@ -51,34 +51,27 @@ def start(url, file):
 
             return True
     except Exception as e:
-        logging.error(f'Terjadi kesalahan saat mendownload : \n{e}')
+        logging.error(f'An error occurred while downloading : \n{e}')
         if response.headers.get('Accept-Range') == 'bytes':
-            logging.info('Server mendukung resume, melanjutkan download...')
+            logging.info('Continue downloading...')
             file_size = os.path.getsize(file)
 
             resume(url, file, file_size)
         else:
-            logging.error('Server tidak mendukung resume, memulai ulang download')
+            logging.error('Server not support resume, restart download...')
             start(url, file)
 
         return True
 
 def download_video(url, file_name, ext):
-    #file = get_directory.video(file_name, ext)
-    file = file_name + '(video)' + '.' + ext
-        
-
-    #print('Downloading file to ' + file)
+    file = file_name + '(video)' + '.' + ext  
 
     downloaded = start(url, file)
     if downloaded:
         return True
 
 def download_audio(url, file_name, ext):
-    #file = get_directory.audio(file_name, ext)
     file = file_name + '(audio)' + '.' + ext
-
-    #print('Downloading file to ' + file)
 
     downloaded = start(url, file)
     if downloaded:

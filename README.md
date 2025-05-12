@@ -15,12 +15,7 @@ SIte supported
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
-## Demo
-
-Wait
+![App Screenshot](https://github.com/Kuredew/cli-dl/tree/main/resources/screenshot1.png)
 
 ## installation
 
