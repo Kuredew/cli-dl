@@ -15,7 +15,7 @@ SIte supported
 
 ## Screenshots
 
-![App Screenshot](https://github.com/Kuredew/cli-dl/tree/main/resources/screenshot1.png?raw=true)
+![App Screenshot](https://github.com/Kuredew/cli-dl/blob/main/resources/screenshot1.png?raw=true&sanitize=true)
 
 ## installation
 
