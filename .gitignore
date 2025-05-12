@@ -1,0 +1,7 @@
+.venv
+output
+ffmpeg
+build
+7zip
+tests.py
+template copy.txt
