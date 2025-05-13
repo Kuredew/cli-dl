@@ -120,4 +120,4 @@ def main(debug):
         logging.info('Program Completed.')
 
 
-main(debug=False)
+main(debug=True)
