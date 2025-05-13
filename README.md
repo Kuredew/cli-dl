@@ -30,7 +30,7 @@ Follow the instruction on it.
 #### Optional
 You can run the command anywhere as long as the folder has been added to the PATH (environment variable). Here is a video tutorial for running ```cli-dl``` in any folder:
 
-![Tutorial](https://github.com/Kuredew/cli-dl/blob/main/resources/tutorial.mp4?raw=true&sanitize=true)
+https://raw.githubusercontent.com/Kuredew/cli-dl/refs/heads/main/resources/tutorial.mp4
 
 ### Method 2 : Run on Python
 
