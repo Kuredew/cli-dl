@@ -8,6 +8,8 @@ class ytdlpLogger:
         logging.info(msg)
     def debug(msg):
         logging.info(msg)
+    def warning(msg):
+        logging.warn(msg)
 
 
 class ytdlpServices:
