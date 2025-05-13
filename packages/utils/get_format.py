@@ -6,7 +6,7 @@ def get(info):
     elif 'formats' in info['entries']:
         return info['entries'][0]['formats']
     else:
-        logging.info('Terdapat lebih dari satu video dalam page/postingan ( biasanya instagram )')
-        index = int(input('Masukkan nomor page/postingan yang ingin didownload : ')) - 1
+        logging.info('Detected multi video page.')
+        index = int(input('Insert index page : ')) - 1
 
         return info['entries'][index]

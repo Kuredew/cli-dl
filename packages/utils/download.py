@@ -24,7 +24,7 @@ def resume(url, file, last_bytes, retry_count=0):
 
                 return True
     except Exception as e:
-        logging.error(f'Terjadi masalah lagi : \n{e}')
+        logging.error(f'Unexpected problems : \n{e}')
         file_size = os.path.getsize(file)
         resume(url, file, file_size, retry_count + 1)
 

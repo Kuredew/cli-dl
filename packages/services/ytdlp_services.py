@@ -24,8 +24,8 @@ class ytdlpServices:
                 info = ydl.extract_info(self.url, download=False)
                 return info
         except Exception as e:
-            logging.error(f'Terjadi masalah pada module YT-DLP : {e}')
-            logging.error('Masalah tidak bisa diatasi, memberhentikan program')
+            logging.error(f'yt-dlp error : {e}')
+            logging.error('Stopping program.')
             exit(1)
 
         
