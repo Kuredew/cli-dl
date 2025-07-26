@@ -10,3 +10,6 @@ ffmpeg/
 # and necessarry directory
 installer/
 output/
+
+# pycache, i forgor
+__pycache__/
