@@ -1,0 +1,12 @@
+# ignore tests project
+tests/
+
+# yea, ignore log
+log-latest.json
+
+# ignore ffmpeg, i'll make function to download ffmpeg in this program soon.
+ffmpeg/
+
+# and necessarry directory
+installer/
+output/
